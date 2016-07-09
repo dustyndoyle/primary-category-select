@@ -115,7 +115,7 @@ if( !class_exists( 'DldPrimaryCategory' ) ) {
 
 			// If there is a Primary Category selected and it is not the current category permalink
 			// change the permalink to the Primary Category selected
-			if ( ! empty( $primary_category ) && $primary_category !== $cat->cat_id ) {
+			if ( $this::has_primary_category( $post->ID ) && $primary_category !== $cat->cat_id ) {
 
 				$cat = get_category( $primary_category );
 			}
@@ -128,7 +128,7 @@ if( !class_exists( 'DldPrimaryCategory' ) ) {
 			$primary_category = $this::get_primary_category( $post_id );
 
 			// If this post has a primary category we can sort them
-			if ( ! empty( $primary_category ) ) {
+			if ( $this::has_primary_category( $post_id ) ) {
 
 				foreach ( $terms as $key => $term ) {
 
