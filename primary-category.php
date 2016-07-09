@@ -161,6 +161,18 @@ if( !class_exists( 'DldPrimaryCategory' ) ) {
 
 			return update_post_meta( $post_id, 'dld_primary_category_select', $primary_category );;
 		}
+
+		public static function has_primary_category( $post_id ) {
+
+			$primary_category = self::get_primary_category( $post_id );
+
+			if( !empty( $primary_category ) ) {
+
+				return true;
+			}
+
+			return false;
+		}
 	}
 }
 
