@@ -1,5 +1,13 @@
 jQuery(function($){
 
+    var primaryCategoryMetabox = $( '#dld_primary_category' );
+
+    // Hide the metabox if no categories are checked
+    if( !hasPrimaryCategoryOptions() ) {
+
+        primaryCategoryMetabox.hide();
+    }
+
     // When a Category is changed in the Categories box
     $( '#categorychecklist li input:checkbox' ).on( 'change', function() {
 
@@ -12,6 +20,15 @@ jQuery(function($){
 
         var isInPrimaryCategorySelect = false;
         var primaryCategoryExistingId;
+
+        // If there are no categories checked, hide the metabox
+        if( !hasPrimaryCategoryOptions() ) {
+
+            primaryCategoryMetabox.hide();
+        } else {
+
+            primaryCategoryMetabox.show();
+        }
 
         // Go through all the already selected categories in the Primary Category Select Box
         $.map( primaryCategorySelectOptions, function( option, i ) {
@@ -36,5 +53,19 @@ jQuery(function($){
         }
     });
 
+    // Determine if Categories are checked
+    function hasPrimaryCategoryOptions() {
+
+        var primaryCategoryOptions = $( '#categorychecklist li input:checkbox:checked' );
+
+        // There is a least one category checked, return true
+        if( primaryCategoryOptions.length > 0 ) {
+
+            return true;
+        }
+
+        // No categories checked, return false
+        return false;
+    }
 
 });
