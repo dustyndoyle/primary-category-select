@@ -41,7 +41,7 @@ if( !class_exists( 'DldPrimaryCategory' ) ) {
 			$post_categories = $this->get_post_categories( $post->ID, $taxonomy );
 
 			// Get an existing value if it exists
-			$primary_category_value = $this->get_primary_category( $post->ID );
+			$primary_category_value = $this::get_primary_category( $post->ID );
 
 			?>
 			<div>
@@ -111,7 +111,7 @@ if( !class_exists( 'DldPrimaryCategory' ) ) {
 
 		public function change_post_category_permalink( $cat, $cats, $post ) {
 
-			$primary_category = $this->get_primary_category( $post->ID );
+			$primary_category = $this::get_primary_category( $post->ID );
 
 			// If there is a Primary Category selected and it is not the current category permalink
 			// change the permalink to the Primary Category selected
@@ -125,7 +125,7 @@ if( !class_exists( 'DldPrimaryCategory' ) ) {
 
 		public function reorder_terms( $terms, $post_id, $taxonomy ) {
 
-			$primary_category = $this->get_primary_category( $post_id );
+			$primary_category = $this::get_primary_category( $post_id );
 
 			// If this post has a primary category we can sort them
 			if ( ! empty( $primary_category ) ) {
@@ -152,7 +152,7 @@ if( !class_exists( 'DldPrimaryCategory' ) ) {
 			return get_the_terms( $post_id, $taxonomy );
 		}
 
-		public function get_primary_category( $post_id ) {
+		public static function get_primary_category( $post_id ) {
 
 			return get_post_meta( $post_id, 'dld_primary_category_select', true );
 		}
